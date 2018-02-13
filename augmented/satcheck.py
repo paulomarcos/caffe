@@ -2,16 +2,19 @@ import numpy as np
 import matplotlib.pyplot as plt
 import cv2
 
-liquid_path  = "data/Liquid/"
-empty_path   = "data/Empty/"
-unknown_path = "data/Unknown/"
+liquid_path  = "dataIMN/Liquid/"
+empty_path   = "dataIMN/Empty/"
+unknown_path = "dataIMN/Unknown/"
 
 paths = [liquid_path, empty_path, unknown_path]
+liquid = []
+empty = []
+unknown = []
 
 width = height = 400
 center_x = int(width / 2)
 
-s_avg = np.array([400, 1])
+s_avg = 0
 
 results = []
 
@@ -33,17 +36,37 @@ for path in paths:
         # s_avg first has the some of every array s and then
         # gets the average by dividing it by the # of images
         # outside the inner loop
-        s_avg = s_avg + s
 
-    s_avg = s_avg / len(lines)
-    results.append(s_avg)
+        sat_sum = sum(s)
+        s_avg = sat_sum / len(s)
+        if path == liquid_path:
+            print "Liquid: "+str(s_avg)
+            liquid.append(s_avg)
+        elif path == empty_path:
+            print "Empty: "+str(s_avg)
+            empty.append(s_avg)
+        else:
+            print "Unknown: "+str(s_avg)
+            unknown.append(s_avg)
+avg_liquid = sum(liquid) / len(liquid)
+avg_empty = sum(empty) / len(empty)
+avg_unknown = sum(unknown) / len(unknown)
+
+print "Average liquid = "+str(avg_liquid)
+print "Average  empty = "+str(avg_empty)
+print "Average unknown = "+str(avg_unknown)
+
+liquid.sort()
+empty.sort()
+unknown.sort()
+
+
 
 plt.figure(1)
 plt.title("Plot for saturation")
-plt.plot(results[0], label = "Liquid")
-plt.plot(results[1], label = "Empty")
-plt.plot(results[2], label = "Unknown")
-plt.xlabel("Pixel position")
+plt.plot(liquid, label = "Liquid")
+plt.plot(empty, label = "Empty")
+plt.plot(unknown, label = "Unknown")
+plt.xlabel("Img ID")
 plt.ylabel("Saturation value")
-#plt.legend()
 plt.show()
