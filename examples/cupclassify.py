@@ -56,7 +56,7 @@ Empty_wrong_U = 0
 Unknown_wrong_L = 0
 Unknown_wrong_E = 0
 
-directory = "failed_classification_googlenet_900000"
+directory = "failed_classification_googlenet_900000_combined"
 try:
 	os.makedirs(directory)
 except OSError as e:

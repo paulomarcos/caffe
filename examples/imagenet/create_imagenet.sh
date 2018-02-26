@@ -3,9 +3,9 @@
 # N.B. set the path to the imagenet train + val data dirs
 set -e
 
-EXAMPLE=examples/imagenet
-DATA=data/ilsvrc12
-TOOLS=build/tools
+EXAMPLE=/home/gother/caffe-cupstate/examples/imagenet
+DATA=/home/gother/caffe-cupstate/data/ilsvrc12
+TOOLS=/home/gother/caffe-cupstate/build/tools
 
 TRAIN_DATA_ROOT=/home/gother/caffe-cupstate/data/ilsvrc12/train/
 VAL_DATA_ROOT=/home/gother/caffe-cupstate/data/ilsvrc12/val/
